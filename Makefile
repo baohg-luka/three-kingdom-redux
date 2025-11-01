@@ -1,4 +1,4 @@
-.PHONY: help run build test clean install clean-build
+.PHONY: help run build test clean install clean-build docker-up docker-down docker-ps docker-logs
 
 # Default target
 .DEFAULT_GOAL := help
@@ -6,6 +6,7 @@
 # Variables
 GRADLE := ./gradlew
 JAVA_VERSION := 17
+DOCKER_COMPOSE := docker-compose
 
 help: ## Show this help message
 	@echo "Available commands:"
@@ -41,4 +42,27 @@ stop: ## Stop running Spring Boot application
 
 status: ## Check application status
 	@lsof -i :8080 || echo "Port 8080 is not in use"
+
+# Docker commands
+docker-up: ## Start PostgreSQL container
+	$(DOCKER_COMPOSE) up -d
+	@echo "Waiting for PostgreSQL to be ready..."
+	@sleep 3
+	@$(DOCKER_COMPOSE) ps
+
+docker-down: ## Stop PostgreSQL container
+	$(DOCKER_COMPOSE) down
+
+docker-stop: docker-down ## Alias for docker-down
+
+docker-ps: ## Show running containers
+	$(DOCKER_COMPOSE) ps
+
+docker-logs: ## Show PostgreSQL logs
+	$(DOCKER_COMPOSE) logs -f postgres
+
+docker-restart: docker-down docker-up ## Restart PostgreSQL container
+
+# Combined commands
+run-with-db: docker-up run ## Start database and run application
 
