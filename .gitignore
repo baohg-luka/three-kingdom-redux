@@ -35,3 +35,44 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Logs ###
+*.log
+logs/
+*.log.*
+
+### Application specific ###
+# Ignore local/override config files but keep main config
+application-local.properties
+application-dev.properties
+application-prod.properties
+application-local.yml
+application-local.yaml
+application-dev.yml
+application-dev.yaml
+application-prod.yml
+application-prod.yaml
+# Keep main application.properties and application.yml
+!application.properties
+!application.yml
+
+### Environment variables ###
+.env
+.env.local
+.env.*.local
+
+### OS specific ###
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+### Temporary files ###
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
