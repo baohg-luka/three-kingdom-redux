@@ -23,4 +23,19 @@ public class AuthController {
         return authService.register(request);
     }
 
+    @PostMapping("/login")
+    public StandardResponse<AuthResponse> login(@RequestBody LoginRequest request) {
+        return authService.login(request);
+    }
+
+    @PostMapping("/refresh")
+    public StandardResponse<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest request) {
+        return authService.refreshToken(request);
+    }
+
+    @PostMapping("/logout")
+    public StandardResponse<String> logout(@RequestBody RefreshTokenRequest request) {
+        return authService.logout(request.getRefreshToken());
+    }
+
 }
