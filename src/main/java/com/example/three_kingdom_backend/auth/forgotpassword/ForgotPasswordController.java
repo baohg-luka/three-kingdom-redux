@@ -1,4 +1,4 @@
-package com.example.three_kingdom_backend.auth;
+package com.example.three_kingdom_backend.auth.forgotpassword;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

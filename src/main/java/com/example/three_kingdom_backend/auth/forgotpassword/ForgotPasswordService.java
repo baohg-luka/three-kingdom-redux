@@ -1,4 +1,4 @@
-package com.example.three_kingdom_backend.auth;
+package com.example.three_kingdom_backend.auth.forgotpassword;
 
 import com.example.three_kingdom_backend.mail.MailService;
 import com.example.three_kingdom_backend.user.UserRepository;
@@ -78,8 +78,6 @@ public class ForgotPasswordService {
 
         var tempPwd = generateTempPassword(14);
         user.setPassword(encoder.encode(tempPwd));
-        // TODO: Add mustChangePassword field to UserEntity if needed
-        // user.setMustChangePassword(true);
         userRepository.save(user);
 
         mailService.send(user.getEmail(),

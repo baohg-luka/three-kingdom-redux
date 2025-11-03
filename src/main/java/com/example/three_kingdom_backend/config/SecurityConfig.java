@@ -1,7 +1,7 @@
-package com.example.three_kingdom_backend;
+package com.example.three_kingdom_backend.config;
 
-import com.example.three_kingdom_backend.auth.JwtAuthenticationFilter;
-import com.example.three_kingdom_backend.auth.LogoutService;
+import com.example.three_kingdom_backend.config.security.JwtAuthenticationFilter;
+import com.example.three_kingdom_backend.config.security.LogoutService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

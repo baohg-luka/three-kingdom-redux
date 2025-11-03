@@ -1,5 +1,6 @@
-package com.example.three_kingdom_backend.auth;
+package com.example.three_kingdom_backend.config.security;
 
+import com.example.three_kingdom_backend.config.security.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -68,7 +69,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception e) {
-            // Invalid token, continue without authentication
             logger.debug("JWT validation failed: " + e.getMessage());
         }
 

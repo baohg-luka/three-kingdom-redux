@@ -1,6 +1,6 @@
-package com.example.three_kingdom_backend.auth;
+package com.example.three_kingdom_backend.auth.forgotpassword;
 
-import com.example.three_kingdom_backend.user.UserEntity;
+import com.example.three_kingdom_backend.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.Instant;
@@ -15,7 +15,7 @@ public class PasswordResetOTP {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private User user;
 
     @Column(name = "code_hash")
     private String codeHash;
