@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.three_kingdom_backend.util.response.StandardResponse;
-import com.example.three_kingdom_backend.user.UserEntity;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -19,7 +19,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public StandardResponse<String> register(@RequestBody UserEntity request) {
+    public StandardResponse<String> register(@Valid @RequestBody RegisterRequest request) {
         return authService.register(request);
     }
 
@@ -31,11 +31,6 @@ public class AuthController {
     @PostMapping("/refresh")
     public StandardResponse<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest request) {
         return authService.refreshToken(request);
-    }
-
-    @PostMapping("/logout")
-    public StandardResponse<String> logout(@RequestBody RefreshTokenRequest request) {
-        return authService.logout(request.getRefreshToken());
     }
 
 }
