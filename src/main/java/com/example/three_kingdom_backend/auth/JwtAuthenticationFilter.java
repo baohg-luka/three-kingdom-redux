@@ -31,11 +31,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain) throws ServletException, IOException {
+        String requestPath = request.getRequestURI();
+
+        if (requestPath.startsWith("/api/auth/forgot-password") ||
+                requestPath.startsWith("/api/auth/register") ||
+                requestPath.startsWith("/api/auth/login") ||
+                requestPath.startsWith("/api/auth/refresh")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String username;
 
-        // Skip JWT validation for refresh tokens (they should be validated differently)
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
