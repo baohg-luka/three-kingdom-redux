@@ -19,4 +19,10 @@ databaseChangeLog:
       file: db/changelog/changes/009-create-match-tables.sql
   - include:
       file: db/changelog/changes/010-rename-un-trained-troops-column.sql
+  - include:
+      file: db/changelog/changes/011-create-match-event-tables.sql
+  - include:
+      file: db/changelog/changes/012-set-tx-id-default-sequence.sql
+  - include:
+      file: db/changelog/changes/013-complete-tx-id-sequence-setup.sql
 
