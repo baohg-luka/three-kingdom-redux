@@ -54,6 +54,53 @@ public class MatchDetailBuilder {
     }
 
     private KingdomInfo createDefaultKingdom(EnumKingdom kingdom) {
+        return switch (kingdom) {
+            case WEI -> buildWeiDefaults();
+            case SHU -> buildShuDefaults();
+            case WU -> buildWuDefaults();
+        };
+    }
+
+    private KingdomInfo buildWeiDefaults() {
+        KingdomInfo info = emptyKingdom(EnumKingdom.WEI);
+        info.setGold(3);
+        info.setRice(3);
+        info.setPopulationSupportToken(0);
+        info.setTribalLevel(5);
+        info.setTotalGeneral(5);
+        info.setUnusedGeneral(5);
+        info.setRedCard(3);
+        info.setYellowCard(1);
+        return info;
+    }
+
+    private KingdomInfo buildWuDefaults() {
+        KingdomInfo info = emptyKingdom(EnumKingdom.WU);
+        info.setGold(4);
+        info.setRice(4);
+        info.setPopulationSupportToken(1);
+        info.setTribalLevel(6);
+        info.setTotalGeneral(4);
+        info.setUnusedGeneral(4);
+        info.setRedCard(3);
+        info.setYellowCard(2);
+        return info;
+    }
+
+    private KingdomInfo buildShuDefaults() {
+        KingdomInfo info = emptyKingdom(EnumKingdom.SHU);
+        info.setGold(5);
+        info.setRice(5);
+        info.setPopulationSupportToken(2);
+        info.setTribalLevel(7);
+        info.setTotalGeneral(3);
+        info.setUnusedGeneral(3);
+        info.setRedCard(3);
+        info.setYellowCard(3);
+        return info;
+    }
+
+    private KingdomInfo emptyKingdom(EnumKingdom kingdom) {
         KingdomInfo info = new KingdomInfo();
         info.setKingdom(kingdom);
         info.setGold(0);

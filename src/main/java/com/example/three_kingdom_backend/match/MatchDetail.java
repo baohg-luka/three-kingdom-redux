@@ -20,6 +20,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "match_details")
@@ -68,14 +70,17 @@ public class MatchDetail extends Auditable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wei_kingdom_info_id", foreignKey = @ForeignKey(name = "fk_match_detail_wei_kingdom"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private KingdomInfo weiKingdomInfo;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shu_kingdom_info_id", foreignKey = @ForeignKey(name = "fk_match_detail_shu_kingdom"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private KingdomInfo shuKingdomInfo;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wu_kingdom_info_id", foreignKey = @ForeignKey(name = "fk_match_detail_wu_kingdom"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private KingdomInfo wuKingdomInfo;
 
 }

@@ -111,6 +111,10 @@ public class RoomService {
             return StandardResponse.createMessage("400", "Not enough members to start the game");
         }
 
+        if (room.getStatus() == STATUS.PLAYING) {
+            return StandardResponse.createMessage("400", "Game is already started");
+        }
+
         room.setStatus(STATUS.PLAYING);
         roomRepository.save(room);
 

@@ -35,7 +35,7 @@ public class Match extends Auditable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "room_id", nullable = false, foreignKey = @ForeignKey(name = "fk_match_room"))
+    @JoinColumn(name = "room_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_match_room"))
     private Room room;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
