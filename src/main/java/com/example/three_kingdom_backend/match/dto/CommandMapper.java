@@ -10,9 +10,16 @@ import java.util.Map;
 
 @Component
 public class CommandMapper {
-    public MatchCommand toCommand(CommandDto dto) {
+    /**
+     * Convert CommandDto to domain MatchCommand.
+     * 
+     * @param dto   the command DTO from client
+     * @param actor the kingdom (determined from authentication, not from client
+     *              input)
+     * @return domain command object
+     */
+    public MatchCommand toCommand(CommandDto dto, EnumKingdom actor) {
         var type = CommandType.valueOf(dto.type());
-        var actor = EnumKingdom.valueOf(dto.actor());
         return switch (type) {
             case RAISE_TROOPS -> {
                 int amount = 2;
