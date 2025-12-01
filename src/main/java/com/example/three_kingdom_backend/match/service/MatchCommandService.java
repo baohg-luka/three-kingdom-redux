@@ -6,6 +6,7 @@ import com.example.three_kingdom_backend.match.KingdomInfo;
 import com.example.three_kingdom_backend.match.commands.MatchCommand;
 import com.example.three_kingdom_backend.match.engine.MatchAggregate;
 import com.example.three_kingdom_backend.match.engine.Simulator;
+import com.example.three_kingdom_backend.match.enums.EnumKingdom;
 import com.example.three_kingdom_backend.match.events.DomainEvent;
 import com.example.three_kingdom_backend.match.events.GoldSpent;
 import com.example.three_kingdom_backend.match.events.TroopsRaised;
@@ -43,6 +44,32 @@ public class MatchCommandService {
     private final MatchEventRepository eventRepo;
 
     private final ObjectMapper objectMapper;
+
+    /**
+     * Determine which kingdom the current user controls in the given match.
+     * This prevents users from impersonating other kingdoms.
+     * 
+     * @param userId  the authenticated user's ID
+     * @param matchId the match ID
+     * @return the kingdom controlled by this user
+     * @throws IllegalStateException if user is not a player in this match
+     */
+    public EnumKingdom determineActor(Long userId, Long matchId) {
+        Match match = matchRepo.findById(matchId)
+                .orElseThrow(() -> new IllegalStateException("Match not found: " + matchId));
+
+        if (match.getWeiPlayer() != null && match.getWeiPlayer().getId().equals(userId)) {
+            return EnumKingdom.WEI;
+        }
+        if (match.getShuPlayer() != null && match.getShuPlayer().getId().equals(userId)) {
+            return EnumKingdom.SHU;
+        }
+        if (match.getWuPlayer() != null && match.getWuPlayer().getId().equals(userId)) {
+            return EnumKingdom.WU;
+        }
+
+        throw new IllegalStateException("User " + userId + " is not a player in match " + matchId);
+    }
 
     @Transactional
     public CommandResult handle(MatchCommand cmd) {
